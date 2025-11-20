@@ -29,8 +29,7 @@ class LoadingScreen {
                     width: 90%;
                 ">
                     <div class="loading-logo" style="text-align: center; margin-bottom: 40px;">
-                        <div class="logo-icon" style="font-size: 4rem; margin-bottom: 10px;">LostBox OS</div>
-                        <div class="logo-text" style="font-size: 2rem; font-weight: bold; color: #00cccc; text-shadow: 0 2px 10px rgba(0, 204, 204, 0.3);">Launch Kernel...</div>
+                        <div class="logo-text" style="font-size: 2rem; font-weight: bold; color: #00cccc; text-shadow: 0 2px 10px rgba(0, 204, 204, 0.3);">LostBox OS</div>
                     </div>
                     
                     <div class="loading-spinner" style="display: flex; justify-content: center; margin-bottom: 30px;">
@@ -79,19 +78,9 @@ class LoadingScreen {
                 </div>
                 
                 <style>
-                    @keyframes fadeIn {
-                        from { opacity: 0; transform: translateY(20px); }
-                        to { opacity: 1; transform: translateY(0); }
-                    }
-                    
-                    @keyframes spin {
+@keyframes spin {
                         0% { transform: rotate(0deg); }
                         100% { transform: rotate(360deg); }
-                    }
-                    
-                    @keyframes bounce {
-                        0%, 100% { transform: translateY(0); }
-                        50% { transform: translateY(-10px); }
                     }
                 </style>
             </div>
