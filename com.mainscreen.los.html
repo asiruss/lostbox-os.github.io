@@ -104,6 +104,27 @@
             <div class="triangle"></div>
         </div>
     </div>
+<!-- В com.mainscreen.los.html добавить скрытый контейнер для восстановления -->
+<div id="system-container" style="display: none;">
+    <!-- Весь оригинальный контент com.mainscreen.los.html здесь -->
+</div>
+
+<script>
+// В конец com.mainscreen.los.html добавить
+window.addEventListener('load', function() {
+    // Показываем систему после полной загрузки
+    const systemContainer = document.getElementById('system-container');
+    if (systemContainer) {
+        systemContainer.style.display = 'block';
+    }
+    
+    // Скрываем загрузчик если он есть
+    const loadingContainer = document.querySelector('.loading-container');
+    if (loadingContainer) {
+        loadingContainer.style.display = 'none';
+    }
+});
+</script>
     <script src="system/lockscreen.kernel.js"></script>
     <script src="system/mainscreen.time.percent.los.js"></script>
     <script src="system/app.kernel.los.js"></script>
