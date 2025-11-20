@@ -134,12 +134,24 @@ class MainKernel {
     }
 }
 
+// 🔥 Запускаем MainKernel после полной загрузки страницы
+window.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        try {
+            window.mainKernel = new MainKernel();
+        } catch (error) {
+            console.error('❌ Ошибка инициализации MainKernel:', error);
+            KernelPanic.showPanic('MainKernel', error);
+        }
+    }, 100);
+});
+
 // 🔥 Защита на случай если MainKernel тоже не загрузился
 setTimeout(() => {
-    if (!window.MainKernel && !document.body.classList.contains('kernel-panic')) {
+    if (!window.mainKernel && !document.body.classList.contains('kernel-panic')) {
         KernelPanic.showPanic('MainKernel');
     }
-}, 1000);
+}, 3000);
 
 // 🔥 Глобальный обработчик ошибок для перехвата непойманных исключений
 window.addEventListener('error', (event) => {
