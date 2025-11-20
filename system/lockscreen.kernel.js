@@ -63,6 +63,8 @@ class LockscreenKernel {
     }
     
     setupEventListeners() {
+        if (!this.lockscreenElement) return;
+        
         this.lockscreenElement.addEventListener('mousedown', this.handleSwipeStart.bind(this));
         this.lockscreenElement.addEventListener('mousemove', this.handleSwipeMove.bind(this));
         this.lockscreenElement.addEventListener('mouseup', this.handleSwipeEnd.bind(this));
@@ -86,6 +88,8 @@ class LockscreenKernel {
     }
     
     updateLockscreenUI() {
+        if (!this.lockscreenElement) return;
+        
         const unlockContent = this.lockscreenElement.querySelector('.unlock-content');
         
         if (!unlockContent) {
@@ -107,7 +111,11 @@ class LockscreenKernel {
     }
     
     createUnlockContent() {
+        if (!this.lockscreenElement) return;
+        
         const unlockArea = this.lockscreenElement.querySelector('.unlock-area');
+        if (!unlockArea) return;
+        
         const unlockContent = document.createElement('div');
         unlockContent.className = 'unlock-content';
         unlockArea.appendChild(unlockContent);
@@ -115,6 +123,8 @@ class LockscreenKernel {
     }
     
     createPasswordInput(container) {
+        if (!container) return;
+        
         const passwordHTML = `
             <div class="password-input-container">
                 <div class="password-field">
@@ -131,26 +141,32 @@ class LockscreenKernel {
         const passwordInput = document.getElementById('lockscreen-password');
         const okBtn = document.getElementById('password-ok-btn');
         
-        passwordInput.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
+        if (passwordInput) {
+            passwordInput.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/\D/g, '');
+            });
+            
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    this.checkPasswordInput();
+                }
+            });
+        }
         
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
+        if (okBtn) {
+            okBtn.addEventListener('click', () => {
                 this.checkPasswordInput();
-            }
-        });
-        
-        okBtn.addEventListener('click', () => {
-            this.checkPasswordInput();
-        });
+            });
+        }
         
         setTimeout(() => {
-            passwordInput.focus();
+            if (passwordInput) passwordInput.focus();
         }, 100);
     }
     
     createPatternLock(container) {
+        if (!container) return;
+        
         const patternHTML = `
             <div class="pattern-lock-container">
                 <div class="pattern-grid" id="pattern-grid">
@@ -174,6 +190,8 @@ class LockscreenKernel {
     
     setupPatternLock() {
         const grid = document.getElementById('pattern-grid');
+        if (!grid) return;
+        
         const dots = grid.querySelectorAll('.pattern-dot');
         let pattern = [];
         let isDrawing = false;
@@ -247,6 +265,9 @@ class LockscreenKernel {
     drawPatternLine(pattern) {
         if (pattern.length < 2) return;
         
+        const grid = document.getElementById('pattern-grid');
+        if (!grid) return;
+        
         const prevDotIndex = pattern[pattern.length - 2];
         const currentDotIndex = pattern[pattern.length - 1];
         
@@ -260,7 +281,7 @@ class LockscreenKernel {
             const prevRect = prevDot.getBoundingClientRect();
             const currentRect = currentDot.getBoundingClientRect();
             
-            const gridRect = document.getElementById('pattern-grid').getBoundingClientRect();
+            const gridRect = grid.getBoundingClientRect();
             
             const x1 = prevRect.left + prevRect.width / 2 - gridRect.left;
             const y1 = prevRect.top + prevRect.height / 2 - gridRect.top;
@@ -278,12 +299,14 @@ class LockscreenKernel {
             line.style.transform = `rotate(${angle}deg)`;
             line.setAttribute('data-line', `${prevDotIndex}-${currentDotIndex}`);
             
-            document.getElementById('pattern-grid').appendChild(line);
+            grid.appendChild(line);
         }
     }
     
     async checkPasswordInput() {
         const input = document.getElementById('lockscreen-password');
+        if (!input) return;
+        
         const enteredPassword = input.value;
         
         if (enteredPassword.length !== 4) {
@@ -328,6 +351,8 @@ class LockscreenKernel {
     
     shakePasswordInput() {
         const input = document.getElementById('lockscreen-password');
+        if (!input) return;
+        
         input.classList.add('shake');
         setTimeout(() => {
             input.classList.remove('shake');
@@ -336,6 +361,8 @@ class LockscreenKernel {
     
     shakePatternLock() {
         const container = document.querySelector('.pattern-lock-container');
+        if (!container) return;
+        
         container.classList.add('shake');
         setTimeout(() => {
             container.classList.remove('shake');
@@ -343,6 +370,8 @@ class LockscreenKernel {
     }
     
     createUnlockSlider(container) {
+        if (!container) return;
+        
         const sliderHTML = `
             <div class="unlock-slider">
                 <div class="unlock-arrow">↑</div>
@@ -352,7 +381,9 @@ class LockscreenKernel {
         container.innerHTML = sliderHTML;
         
         const unlockSlider = container.querySelector('.unlock-slider');
-        unlockSlider.addEventListener('click', this.handleUnlockAttempt.bind(this));
+        if (unlockSlider) {
+            unlockSlider.addEventListener('click', this.handleUnlockAttempt.bind(this));
+        }
     }
     
     handleSwipeStart(e) {
@@ -401,7 +432,9 @@ class LockscreenKernel {
         
         this.swipeLine = document.createElement('div');
         this.swipeLine.className = 'swipe-line';
-        this.lockscreenElement.appendChild(this.swipeLine);
+        if (this.lockscreenElement) {
+            this.lockscreenElement.appendChild(this.swipeLine);
+        }
     }
     
     updateSwipeLine(distance) {
@@ -452,14 +485,18 @@ class LockscreenKernel {
     }
     
     showLockScreen() {
-        this.lockscreenElement.style.display = 'flex';
+        if (this.lockscreenElement) {
+            this.lockscreenElement.style.display = 'flex';
+        }
         this.isLocked = true;
         this.tempPasswordDisabled = false;
         this.updateLockscreenUI();
     }
     
     hideLockScreen() {
-        this.lockscreenElement.style.display = 'none';
+        if (this.lockscreenElement) {
+            this.lockscreenElement.style.display = 'none';
+        }
         this.isLocked = false;
         this.tempPasswordDisabled = false;
     }
@@ -470,11 +507,15 @@ class LockscreenKernel {
      * Скрывает локскрин и явно показывает рабочий стол и его панели.
      */
     unlock() {
-        this.lockscreenElement.style.animation = 'swipeUp 0.5s ease forwards';
+        if (this.lockscreenElement) {
+            this.lockscreenElement.style.animation = 'swipeUp 0.5s ease forwards';
+        }
         
         setTimeout(() => {
             this.hideLockScreen();
-            this.lockscreenElement.style.animation = '';
+            if (this.lockscreenElement) {
+                this.lockscreenElement.style.animation = '';
+            }
             
             // 🔥 ЯВНО ПОКАЗЫВАЕМ ЭЛЕМЕНТЫ РАБОЧЕГО СТОЛА ПОСЛЕ РАЗБЛОКИРОВКИ
             const desktopElement = document.getElementById('desktop');
@@ -541,6 +582,8 @@ class LockscreenKernel {
         const options = { weekday: 'long', day: 'numeric', month: 'long' };
         const dateString = now.toLocaleDateString('ru-RU', options);
         
+        if (!this.lockscreenElement) return;
+        
         const dateElement = this.lockscreenElement.querySelector('.lockscreen-date');
         if (!dateElement) {
             const dateEl = document.createElement('div');
@@ -590,7 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.lockscreenKernel = new LockscreenKernel();
     
     setInterval(() => {
-        if (window.lockscreenKernel && document.getElementById('lockscreen').style.display === 'flex') {
+        if (window.lockscreenKernel && document.getElementById('lockscreen')?.style.display === 'flex') {
             window.lockscreenKernel.syncWithSystemStatus();
         }
     }, 1000);
@@ -598,4 +641,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 if (typeof window !== 'undefined') {
     window.LockscreenKernel = LockscreenKernel;
-} 
+}
