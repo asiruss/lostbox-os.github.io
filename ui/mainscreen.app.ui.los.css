@@ -1,0 +1,116 @@
+/* Рабочий стол */
+.desktop {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #004f4f 0%, #003737 100%);
+  -webkit-tap-highlight-color: transparent;
+  image-rendering: pixelated;
+}
+
+/* Упрощенные иконки приложений */
+.app-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  padding: 5px;
+}
+
+.app-icon:hover {
+  transform: scale(1.05);
+}
+
+.app-icon:active {
+  transform: scale(0.95);
+}
+
+.app-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.app-name {
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Контейнер приложений */
+#app-container {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 100px);
+  background: black;
+  z-index: 100;
+  display: none;
+}
+
+.app-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ВИДЖЕТ ГАЛЕРЕИ (2x2 клетки) */
+.desktop-widget {
+    grid-column: 3 / span 2;
+    grid-row: 3 / span 2;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+}
+
+.widget-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Контейнер для фото с обрезкой */
+.photo-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.widget-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.widget-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    text-align: center;
+    padding: 20px;
+} 

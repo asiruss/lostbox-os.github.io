@@ -1,0 +1,411 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: #004f4f;
+  font-family: sans-serif;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ================================================= */
+/* 🔥 ФИКС: Скрываем рабочий стол и панели по умолчанию */
+/* ================================================= */
+#desktop,
+.top-bar,
+.bottom-bar {
+    display: none; /* Гарантируем, что эти элементы не видны до разблокировки */
+}
+/* ================================================= */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  height: 40px;
+  background-color: #003737;
+  font-size: 14px;
+  flex-shrink: 0;
+  z-index: 9998;
+}
+
+.battery {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+#battery-percent {
+  order: -1;
+}
+
+.battery-box {
+  width: 24px;
+  height: 12px;
+  border: 2px solid white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+.battery-box::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 2px;
+  width: 2px;
+  height: 8px;
+  background-color: white;
+}
+
+.battery-level {
+  height: 100%;
+  background-color: green;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #003737;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  box-sizing: border-box;
+  z-index: 9998;
+}
+
+.button {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* сами кнопки */
+.circle {
+  width: 35px;
+  height: 35px;
+  background-color: #008080;
+  border-radius: 50%;
+  border: 2px solid;
+  border-top-color: #00cccc;
+  border-left-color: #00cccc;
+  border-right-color: #005555;
+  border-bottom-color: #005555;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.square {
+  width: 25px;
+  height: 25px;
+  background-color: #008080;
+  border: 2px solid;
+  border-top-color: #00cccc;
+  border-left-color: #00cccc;
+  border-right-color: #005555;
+  border-bottom-color: #005555;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.triangle-container {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 24px solid #008080;
+  position: relative;
+}
+
+.triangle::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: -2px;
+  width: 0;
+  height: 0;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 26px solid #00cccc;
+  z-index: -1;
+}
+
+.triangle::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 24px solid #005555;
+  z-index: -1;
+}
+
+/* Анимация нажатия */
+.button:active .circle,
+.button:active .square {
+  border-top-color: #005555;
+  border-left-color: #005555;
+  border-right-color: #00cccc;
+  border-bottom-color: #00cccc;
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.button:active .triangle::before {
+  border-right-color: #005555;
+}
+
+.button:active .triangle::after {
+  border-right-color: #00cccc;
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { background-color: red; }
+  25%, 75% { background-color: transparent; }
+}
+
+/* Стили для последних приложений - ПОЛНЫЙ ЭКРАН */
+.recent-apps-overlay {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 79, 79, 0.95);
+  backdrop-filter: blur(15px);
+  z-index: 100;
+  display: none;
+  opacity: 0;
+  transition: all 0.3s ease;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 70px;
+  box-sizing: border-box;
+}
+
+.recent-apps-title {
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+/* Контейнер с прокруткой на всю высоту */
+.recent-apps-scroll-container {
+  width: 100%;
+  height: calc(100vh - 240px); /* 100% высоты минус заголовок и футер */
+  overflow-y: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.recent-apps-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.recent-apps-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding-bottom: 30px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.recent-app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.recent-app-item:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.recent-app-screenshot {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.recent-app-name {
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+}
+
+.recent-apps-empty {
+  grid-column: 1 / -1;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 80px 20px;
+}
+
+.recent-apps-close {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 101;
+}
+
+.recent-apps-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Кнопка закрытия всех */
+.recent-apps-footer {
+  width: 100%;
+  padding: 50px;
+  padding: 50px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 55, 55, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  bottom: 80px;
+  position: fixed;
+}
+
+.close-all-btn {
+  padding: 15px 30px;
+  background: rgba(255, 68, 68, 0.8);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+.close-all-btn:hover {
+  background: rgba(255, 68, 68, 1);
+  transform: scale(1.05);
+}
+
+.close-all-btn:active {
+  transform: scale(0.95);
+}
+
+/* Стили для свайпа */
+.recent-app-delete {
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: #ff4444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+  transition: right 0.3s ease;
+  z-index: 10;
+}
+
+.recent-app-item.swiped .recent-app-delete {
+  right: 15px;
+}
+
+/* Анимация закрытия */
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.slide-out {
+  animation: slideOut 0.3s ease forwards;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 480px) {
+  .recent-apps-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    max-width: 350px;
+  }
+  
+  .recent-apps-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .recent-app-item {
+    min-height: 160px;
+    padding: 12px;
+  }
+  
+  .recent-app-screenshot {
+    height: 100px;
+  }
+} 
