@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>com.mainscreen.los</title>
+    <link rel="stylesheet" href="ui/mainscreen.ui.los.css">
+    <link rel="stylesheet" href="ui/mainscreen.app.ui.los.css">
+    <link rel="stylesheet" href="ui/lockscreen.ui.los.css">
+    <link rel="stylesheet" href="ui/error.ui.los.css">
+</head>
+<body>
+    <div id="lockscreen">
+        <div class="lockscreen-top-bar">
+            <div class="lockscreen-battery">
+                <div class="lockscreen-battery-percent" id="lockscreen-battery-percent">?%</div>
+                <div class="lockscreen-battery-box">
+                    <div class="lockscreen-battery-level" id="lockscreen-battery-level"></div>
+                </div>
+            </div>
+        </div>
+        <div class="lockscreen-time-container">
+            <div class="lockscreen-time" id="lockscreen-time">??:??</div>
+        </div>
+        <div class="unlock-area">
+            <div class="unlock-hint">
+                <div>Добро пожаловать!</div>
+            </div>
+            <div class="unlock-slider">
+                <div class="unlock-arrow"></div>
+            </div>
+            <div class="swipe-indicator"></div>
+        </div>
+        <div class="lockscreen-bottom-bar"></div>
+    </div>
+    
+    <div class="top-bar">
+        <div id="time">??:??</div>
+        <div class="battery">
+            <div id="battery-percent">?%</div>
+            <div class="battery-box">
+                <div class="battery-level" id="battery"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="desktop" id="desktop" class="desktop">
+        <div class="app-icon" data-app="camera">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAHESURBVGiB7ZqxSgNBEIb/hBQBQbDwES5PYO2DWFxhkdYHSLONWIqdpNx38AXEQsFCAiGSExK9wigGPBtBTrRIPM4zd3s7u3djYD8IJLnZ2f/PzexuQhpxNPtCDUTRWyV5WwDQOj6tJHnVzPf30OQWYYozwI0zwI0zwI0zwI0zwM3aG2gZZxBCP3bVGJ08KcwNAOj1jv68F4aTX6+l7C+eCJHEp2OkECQTzSrO6Vnxqpjp9I48l/UeqFM8QCmhgtusFL8cm5TTquuaZUTqgTI1n8X3u8q8Uva1TVhp4jCc5H6qaeHpmDxDntdBUNLEYDgy74Ef8dFHjDiaYevsKnlsHp4koqXsI35tI7xt4/q8nV9GSxNl74KRgXTZbLy/KOMfZyazrYZcQtma3764V455eqbOlg/JQJmlMovvd7Gzq+4BXaw0cVmKRFP3A2sGPm8uyWNNNjMrBny/C9k7yL1WRP07cQ6UmjYVDzB+H7AhHmAyYEs8QCyhol20bminUSEW230FBMFYKzethIRAEIxJQ1V4XkcrN30VEmJxamTGbBn9BwbW/mcVZ4AbZ4AbZ4AbZ4AbZ4CbxvxhTPq7zWA4sq2FxDeXVa2STnKThgAAAABJRU5ErkJggg==" alt="Камера" class="app-img">
+            <span class="app-name">Камера</span>
+        </div>
+
+        <div class="app-icon" data-app="gallery">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAHgSURBVGiB7Zo9agJBGIZfRdRKI8QiRcqVHECYzgvsDVLmDDnAHEBIm1Oks02RTkgliMGFFEkR8yPrWplFMMVmZDWiOzPf7ESYBxaUZb59H2bW+cHCMpqskANRNDdStwQApZtbI8VNM726RNF2CF2cgG2cgG2cgG2cgG2OXqAk3YJz+hQa9eUFADR6fZVmBwl9lghISJAModBn60sXz2vlKxD6DMtZFctZFa9P1dwlijrrdBEeAN4mwPsH8PhAI5EV5R7YFV6Qp4T2ENoOnzdaArbDAxoCjV4f5xeLnffanYWxn9o0g+FIrwcavT7anU0JmfAU74nSRJYmkWAb37MQ+gzlbh2hz7R6S1sAkJ+ZRXgA2hK5LObSQyUdXiAkVCDpgX2EPkNl3kRYSwJuhxeUu3XE15F0faMCIjy+gMpzE6u7mPwZxoZQOjwArO5j4IT+OUYE/oQfxMDp701iCXKB7fD4BApn5eSzAQlSgV3hBaYkyAT2hReYkCDbkR0KL6CWINmRZQ0voJTQElAJL6CSUJrI0tP+d00itQHUzoU4TzbeBgiCsVRttSHEOYJgrNT0EJ7XkqqtvhbiHIHpU7oM6C3m/oHA0R/uOgHbOAHbOAHbFKYvY6W/2wyGI+osSvwAOue0J9CpLU0AAAAASUVORK5CYII=" alt="Галерея" class="app-img">
+            <span class="app-name">Галерея</span>
+        </div>
+                
+        <div class="app-icon" data-app="calcul">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAFVSURBVGiB7ZoxbsMwDEV/Am85h3OeTB069iS8QdecoVPOEiAIYG2dumRwgGwGmqHQYsSNSJGmjOhtDmSCnzSlbyOrof/5xQz0/dUkbgMAzefeJLg1l493rL2TyKUK8KYK8KYK8KYK8GbxAhr2HUT6WWTE5wsAMHwlBn8TrCdiiSjuEWrb7fwCbrsBt92gEQoAT8TayqfPhWgGIuOqx+vN4XHYqS5NrU+huBngktWBWLlnlR+v12TRHTieznkdiFhUNpVFdwAQzkA8Ya3Wc3jNDph6ISYuHdC0HlkCxoloe6IUVPY/btKa2272STxO/r/kqhd6gKobjb9NVbRYL7Q5NKzkNIddxY1OXc+Biwtz34VK8kKy70JEfy/eBoTQsWLLhpgIIXSiW5/RtltWbPnDSIRg/ZUugbxpKkDA4k/iKsCbKsCbKsCb1eW7E/3d5ng6a+ci4g6SDW0anJqidwAAAABJRU5ErkJggg==" alt="Калькулятор" class="app-img">
+            <span class="app-name">Калькулятор</span>
+        </div>
+        
+        <div class="app-icon" data-app="security">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAEFSURBVGiB7ZoxCoMwFIZ/izdwd/QUrm6eoGNP4g269iBurp5AEKFjJxeHdBbayUKFFjUv+W153yp5/l8S4gsYjKZ/wAPG3J3UDQEgPF+cFHfNcDriwA5hiwqwUQE2KsBGBdioABsVYPPzAqF1n14U9iksaoT2bwdG03989m2CojhBXZVIs3yzhNMttHR166rcn4CrK+QcJwK+wjdtJy/gK/yEqIDv8ICgACM8ICTACg/8wZdYBdjYCxQFojhZPWxqI2yRWYGVEvPw++iFFkpIhgeEutEXCyXSLH8bY4OsACBzP1iBnkJsVICNCrBRATYqwEYF2KgAm2C4XTf9btO0nXSWTTwBFEZLvX0LD7AAAAAASUVORK5CYII=" alt="Безопасность" class="app-img">
+            <span class="app-name">Безопасность</span>
+        </div>       
+        
+        <div class="app-icon" data-app="notes">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAGLSURBVGiB7ZqvbsMwEId/ncxD8zqFRWUFgdXoXmGy9gIDJVM1DQQMlAUF5h0qVZUGh0IKXBxpA2msROvU5s7xJZI/VFCf78v5z6XqrDLlDzxgzHmQuAoA1OvbIMGH5rRO8CCdBJcgIE0QkCYISBMEpAkC0ijWaK3dZMGIwxMAUJmSNV5FcS1AlGALAMD66Zk07mPzAgAo8gzzxZIkoVz06U0iHDoSjcgdQqOoQAet8Y5PAMCjTm5KOBFwUYGGageoVWIlbjGaCswXS1S7+nMj4W0JcSvQTh4A1Ap3Jb8/HMdRAUry9vukmf9JpC8qilnJA4J7IE23f5MnIFKBa0/e3gM98V6Ba0++yDPy3F4roKIYRZ5BXU4d6rLpxOSH6L8HrIQp62aOgdcKpOnWrnNuF9vgtQKukm4zipuYw+RfKYOANOw9wD0G2fOzRl9e/zg3KVC309QY/CWkNamHaUPtgwBHx6gLCSpuBAB3P3L1ZPKnUBCQJghIEwSkmbzA7PT9Rfq7zf5wdJ0LiV+a7o5q9KpSdAAAAABJRU5ErkJggg==" alt="Заметки" class="app-img">
+            <span class="app-name">Заметки</span>
+        </div>
+
+        <div class="app-icon" data-app="browser">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAFSSURBVGiB7ZoxSgNREIa/yPY2nsB6b2MVYRuvYfNukNbewnsIuUDcELCwsLLYQNY6oMW6FkkWNjPzdhTmgyUkgbff/2byMoTM9u3HFxPQtp9Z1i0AisVDlsVzs7275cJbQksE8CYCeBMBvIkA3kQAFSl1lwK/ACnBY91dihCFmdA59PLz658XaqhKUZDpK3Akr6MwndPH7OCh/NObePfBsoVSguf98Pu7BtrGVB6sWshJHiwCSOUvr9S3hpyn0K7pHjPKr9abTKfQBPI99gHGyr8sTW6XpwITyYN1gDEfWEN5sAyQ+bQZwibAWHnj3QerAE7yoP0eODWYZe75Q+QV0Mrf36jHCJAG+CPyIGmhIfmqPG8NI/SzkNFUKUVWgaoE6u65ozxIK/AbAld50LSQs3hP/LDlTQTwJgJ4EwG8iQDe/PsAs+37q+jvNqv1xtpFxDe2pqEBCwRs5wAAAABJRU5ErkJggg==" alt="Браузер" class="app-img">
+            <span class="app-name">Браузер</span>
+        </div>
+      <div class="app-icon" data-app="search">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAJ/SURBVGiB7Zq/a9tAFMe/SgzqkMX2GhuCCA0UCgcl7dTBU4dCIZs9+r/oYjv5B0q3Th3rLVDo0CndS+EgYJIGtLgeQuAwLhlqE1AH9VRZtez7qRMlXxDo8N3pfe69O71n27ubXUcoQLPZTyvzVgCg8uadlclti3U72HJthK7uAVxrI8CTT5+F2qb7ier/98C3ly+WVm9V20Y/YwBll3c3u45E3gPZ1Um38+5V+4mKdTviAGWU8otsf3sPzalv2h4lSQPsb+9h5/EzACgFhBQAN97fDVBvHQGIIVyCVEQ7Nqc+dlqx8QASCHZ2ivHb12pPHwzUxqUktYmbUx/11lECAQDzSYhRdJg7JjyY537WOPilBcG6HWzJ5uns7BTzSZi0/d0Aj7yvSgb8uHyg7QWpPTCuxqspAxFcrt8fuhDKb2L66qExCB1JA3AvAMAoOnQOoeQBVYjGza3K43J1Prowk8y5hDCWjW6CWNRYcm8Swmg6nQeRNp6rcXObXDoyXg+sgiDTcM0IPVkpaIqEsFaRFQVhBWBRY1jUGGg1sA6hBcANzV5p2YYopKiXgYj6PUT9nvDcwvWArmg1AJmES/UEmYSg1b+pedTvwTs+kZpX3QODAfBcjj/XE3+yUVnjAd0QMgVB2som6IeQCgQA8vH7cjihDUqH0o/32Pgqqr//ID3QhAhp/1OeUjoEIWIwX54St18tUjpcCqdV2nQqFXYKZcVPHEqHIIj3AA+lbJ91cgaQFg8XgjikuFdETiVnIeQdnyShQUg7OYk2hVRWTj3AV1jl9OEq7e8DoulEaQFEVUoAmZyolAAyOVEpAWR0D+BaHhtfKf3d5nx0YdoWJf0GKpxrr4cdRJAAAAAASUVORK5CYII=" alt="Поисковик" class="app-img">
+  <span class="app-name">Поисковик</span>
+</div>  
+        <div class="app-icon" data-app="mail">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAEtSURBVGiB7Zo9CsJAEEY/JbWBVDbpcgJPE2wEsbD1BrmBrYWNXU5jIYSAWGkjgkKs/SvCxEZBZnYdAvO6kOzke+xmNoF0btXxiT9QVVcvdQMACOYLL8V9cx4P0dUOIcUEtDEBbUxAGxPQxgS0MQFt2i/g6z39X7R/BrQDSGm9QCAtcJtNZQHCPpBlrLGbopQLAO8P9ihOfrr+ctgBAMKwh3y1RDqasCWcLKEoThDFCS6HXRPuE3Serify1ZIt4GQGCApFEt+OXeJUgGiCD+oJjtYPH7cB4EmA8BmcsDYKAPfryUUZFmKBIOzXXYRJOpqIxsuXUJbVfZxJsw8wcfMQCyUkuOtCzI1ISuu7kAloYwLamIA2JqCNCWhjAtqYgDad837L+t1mU5Sus7B4AUsyTO9+6LWEAAAAAElFTkSuQmCC" alt="Почта" class="app-img">
+            <span class="app-name">Почта</span>
+        </div>
+
+        <!-- ВИДЖЕТ ГАЛЕРЕИ (2x2 клетки) -->
+        <div class="desktop-widget" id="gallery-widget">
+            <div class="widget-content" id="random-photo-container">
+                <!-- Рандомное фото загрузится автоматически -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="app-container"></div>
+    
+    <div class="bottom-bar">
+        <div class="button" id="home-btn">
+            <div class="square"></div>
+        </div>
+        <div class="button" id="back-btn">
+            <div class="circle"></div>
+        </div>
+        <div class="button" id="close-btn">
+            <div class="triangle"></div>
+        </div>
+    </div>
+<!-- В com.mainscreen.los.html добавить скрытый контейнер для восстановления -->
+<div id="system-container" style="display: none;">
+    <!-- Весь оригинальный контент com.mainscreen.los.html здесь -->
+</div>
+<script src="system/mainscreen.time.percent.los.js"></script>
+<script src="system/lockscreen.kernel.los.js"></script>
+<script src="system/app.kernel.los.js"></script>
+<script src="system/navigation.kernel.los.js"></script>
+<script src="system/error.kernel.los.js"></script>
+<script src="system/kernel.js"></script>
+</body>
+</html> 
